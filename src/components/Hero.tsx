@@ -25,8 +25,8 @@ const Hero = () => {
 
   return (
     <section 
-    ref={sectionRef} 
-    className="pt-8 min-h-[100svh] flex items-center justify-center relative overflow-hidden py-16 lg:py-0"
+      ref={sectionRef} 
+      className={`pt-${isMobile ? '6' : '8'} min-h-[100svh] flex items-center justify-center relative overflow-hidden py-16 lg:py-0`}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-100 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <svg className="absolute inset-0 w-full h-full opacity-10 dark:opacity-20" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@ const Hero = () => {
             }}
             transition={{ 
               repeat: Infinity,
-              duration: 10,
+              duration: isMobile ? 8 : 10,
               ease: "easeInOut",
             }}
           />
@@ -52,7 +52,7 @@ const Hero = () => {
             }}
             transition={{ 
               repeat: Infinity,
-              duration: 8,
+              duration: isMobile ? 6 : 8,
               ease: "easeInOut",
               delay: 0.5
             }}
@@ -69,20 +69,21 @@ const Hero = () => {
           }}
           transition={{ 
             repeat: Infinity, 
-            duration: 30,
+            duration: isMobile ? 25 : 30,
             ease: "linear"
           }}
         />
       </div>
       
+      {/* Floating blobs with parallax effect */}
       <motion.div style={{ y, opacity }} className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 6 }).map((_, i) => (
+        {Array.from({ length: isMobile ? 4 : 6 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-gradient-to-br from-blue-400 to-purple-500 opacity-50 dark:opacity-70"
             style={{
-              width: Math.random() * 150 + 100,
-              height: Math.random() * 150 + 100,
+              width: Math.random() * (isMobile ? 100 : 150) + 100,
+              height: Math.random() * (isMobile ? 100 : 150) + 100,
               top: `${Math.random() * 80 + 10}%`,
               left: `${Math.random() * 80 + 10}%`,
               filter: "blur(70px)",
@@ -111,7 +112,7 @@ const Hero = () => {
           }}
           transition={{ 
             repeat: Infinity, 
-            duration: 20,
+            duration: isMobile ? 15 : 20,
             ease: "linear"
           }}
         >
@@ -125,18 +126,20 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-6 z-10 flex flex-col lg:flex-row items-center justify-between gap-12 relative">
-        <div className="lg:w-1/2 text-center lg:text-left order-2 lg:order-1 mt-12 lg:mt-0">
+        <div className={`${isMobile ? 'w-full' : 'lg:w-1/2'} text-center lg:text-left order-2 lg:order-1 mt-12 lg:mt-0`}>
           <motion.div 
-            className="inline-block mb-3 px-4 py-1 rounded-full bg-blue-100/80 dark:bg-blue-900/30 backdrop-blur-sm border border-blue-200 dark:border-blue-800"
+            className={`inline-block mb-3 px-${isMobile ? '3' : '4'} py-1 rounded-full bg-blue-100/80 dark:bg-blue-900/30 backdrop-blur-sm border border-blue-200 dark:border-blue-800`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-blue-800 dark:text-blue-300 font-medium text-sm">Trusted by 500+ companies</span>
+            <span className={`text-blue-800 dark:text-blue-300 font-medium text-${isMobile ? 'xs' : 'sm'}`}>
+              Trusted by {isMobile ? '500+' : '500+ companies'}
+            </span>
           </motion.div>
           
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-indigo-700 to-violet-700 dark:from-blue-300 dark:via-indigo-300 dark:to-violet-300 font-['Plus_Jakarta_Sans'] leading-tight tracking-tight"
+            className={`text-${isMobile ? '3xl' : '4xl'} sm:text-5xl md:text-6xl xl:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-indigo-700 to-violet-700 dark:from-blue-300 dark:via-indigo-300 dark:to-violet-300 font-['Plus_Jakarta_Sans'] leading-tight tracking-tight`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
@@ -146,7 +149,7 @@ const Hero = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-xl font-['Inter'] mx-auto lg:mx-0"
+            className={`text-${isMobile ? 'base' : 'lg'} sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-xl font-['Inter'] mx-auto lg:mx-0`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -161,7 +164,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <motion.button 
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-xl shadow-xl shadow-blue-500/30 dark:shadow-blue-700/30 inline-flex items-center justify-center"
+              className={`w-${isMobile ? 'full' : 'auto'} bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-xl shadow-xl shadow-blue-500/30 dark:shadow-blue-700/30 inline-flex items-center justify-center`}
               whileHover={{ 
                 scale: 1.05, 
                 boxShadow: "0 20px 25px -5px rgb(59 130 246 / 0.5)"
@@ -175,7 +178,7 @@ const Hero = () => {
             </motion.button>
             
             <motion.button 
-              className="w-full sm:w-auto text-blue-700 dark:text-blue-400 font-semibold py-4 px-8 rounded-xl border border-blue-300 dark:border-blue-800 hover:bg-blue-50/50 dark:hover:bg-blue-900/30 backdrop-blur-sm"
+              className={`w-${isMobile ? 'full' : 'auto'} text-blue-700 dark:text-blue-400 font-semibold py-4 px-8 rounded-xl border border-blue-300 dark:border-blue-800 hover:bg-blue-50/50 dark:hover:bg-blue-900/30 backdrop-blur-sm`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -198,9 +201,9 @@ const Hero = () => {
           </motion.div>
         </div>
         
-        <div className="lg:w-1/2 order-1 lg:order-2 relative">
+        <div className={`${isMobile ? 'w-full' : 'lg:w-1/2'} order-1 lg:order-2 relative`}>
           <motion.div
-            className="relative w-full max-w-md mx-auto lg:mx-0 lg:mr-0 lg:ml-auto"
+            className={`relative w-full ${isMobile ? 'max-w-xs' : 'max-w-md'} mx-auto lg:mx-0 lg:mr-0 lg:ml-auto`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -210,8 +213,8 @@ const Hero = () => {
             <motion.div 
               className="relative z-10"
               whileHover={{ 
-                rotateY: 5, 
-                rotateX: 5,
+                rotateY: isMobile ? 3 : 5, 
+                rotateX: isMobile ? 3 : 5,
                 scale: 1.02,
                 transition: { duration: 0.3 }
               }}
@@ -275,7 +278,7 @@ const Hero = () => {
               }}
               transition={{ 
                 repeat: Infinity, 
-                duration: 5,
+                duration: isMobile ? 4 : 5,
                 ease: "easeInOut"
               }}
             >
@@ -284,6 +287,27 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+      
+      {isMobile && (
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+        >
+          <motion.div 
+            className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center"
+            animate={{ y: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <motion.div 
+              className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full mt-2"
+              animate={{ y: [0, 15, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            />
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 };
